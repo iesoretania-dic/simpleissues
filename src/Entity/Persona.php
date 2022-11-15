@@ -38,9 +38,16 @@ class Persona
      */
     private $incidencias;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Categoria", mappedBy="gestor")
+     * @var Categoria[]|Collection
+     */
+    private $responsabilidades;
+
     public function __construct()
     {
         $this->incidencias = new ArrayCollection();
+        $this->responsabilidades = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,6 +92,23 @@ class Persona
     public function setIncidencias($incidencias)
     {
         $this->incidencias = $incidencias;
+        return $this;
+    }
+
+    /**
+     * @return Categoria[]|ArrayCollection|Collection
+     */
+    public function getResponsabilidades()
+    {
+        return $this->responsabilidades;
+    }
+
+    /**
+     * @param Categoria[]|ArrayCollection|Collection $responsabilidades
+     */
+    public function setResponsabilidades($responsabilidades) : Persona
+    {
+        $this->responsabilidades = $responsabilidades;
         return $this;
     }
 }

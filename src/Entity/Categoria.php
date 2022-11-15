@@ -38,6 +38,13 @@ class Categoria
      */
     private $incidencias;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Persona", inversedBy="responsabilidades")
+     * @ORM\JoinColumn(nullable=false)
+     * @var Persona
+     */
+    private $gestor;
+
     public function __construct()
     {
         $this->incidencias = new ArrayCollection();
@@ -84,6 +91,17 @@ class Categoria
     public function setIncidencias($incidencias) : Categoria
     {
         $this->incidencias = $incidencias;
+        return $this;
+    }
+
+    public function getGestor(): ?Persona
+    {
+        return $this->gestor;
+    }
+
+    public function setGestor(Persona $gestor): Categoria
+    {
+        $this->gestor = $gestor;
         return $this;
     }
 }
