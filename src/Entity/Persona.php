@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,17 @@ class Persona
      */
     private $apellidos;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Incidencia", mappedBy="abiertaPor")
+     * @var Incidencia[]|Collection
+     */
+    private $incidencias;
+
+    public function __construct()
+    {
+        $this->incidencias = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +67,24 @@ class Persona
     public function setApellidos(string $apellidos): Persona
     {
         $this->apellidos = $apellidos;
+        return $this;
+    }
+
+    /**
+     * @return Incidencia[]|Collection
+     */
+    public function getIncidencias()
+    {
+        return $this->incidencias;
+    }
+
+    /**
+     * @param Incidencia[]|Collection $incidencias
+     * @return Persona
+     */
+    public function setIncidencias($incidencias)
+    {
+        $this->incidencias = $incidencias;
         return $this;
     }
 }
