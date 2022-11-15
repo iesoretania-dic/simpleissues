@@ -55,6 +55,12 @@ class Incidencia
      */
     private $abiertaPor;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Persona")
+     * @var Persona
+     */
+    private $cerradaPor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +129,17 @@ class Incidencia
     public function setAbiertaPor(Persona $abiertaPor): Incidencia
     {
         $this->abiertaPor = $abiertaPor;
+        return $this;
+    }
+
+    public function getCerradaPor(): ?Persona
+    {
+        return $this->cerradaPor;
+    }
+
+    public function setCerradaPor(Persona $cerradaPor): Incidencia
+    {
+        $this->cerradaPor = $cerradaPor;
         return $this;
     }
 }
