@@ -36,6 +36,13 @@ class Usuario
      */
     private $administrador;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Persona")
+     * @ORM\JoinColumn(nullable=false, unique=true)
+     * @var Persona
+     */
+    private $persona;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +78,17 @@ class Usuario
     public function setAdministrador(bool $administrador): Usuario
     {
         $this->administrador = $administrador;
+        return $this;
+    }
+
+    public function getPersona(): ?Persona
+    {
+        return $this->persona;
+    }
+
+    public function setPersona(Persona $persona): Usuario
+    {
+        $this->persona = $persona;
         return $this;
     }
 }
