@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,17 @@ class Categoria
      */
     private $visible;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Incidencia", mappedBy="categorias")
+     * @var Incidencia[]|Collection
+     */
+    private $incidencias;
+
+    public function __construct()
+    {
+        $this->incidencias = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +67,23 @@ class Categoria
     public function setVisible(bool $visible): Categoria
     {
         $this->visible = $visible;
+        return $this;
+    }
+
+    /**
+     * @return Incidencia[]|ArrayCollection|Collection
+     */
+    public function getIncidencias()
+    {
+        return $this->incidencias;
+    }
+
+    /**
+     * @param Incidencia[]|ArrayCollection|Collection $incidencias
+     */
+    public function setIncidencias($incidencias) : Categoria
+    {
+        $this->incidencias = $incidencias;
         return $this;
     }
 }

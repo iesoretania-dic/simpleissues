@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +62,18 @@ class Incidencia
      * @var Persona
      */
     private $cerradaPor;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Categoria", inversedBy="incidencias")
+     * @var Categoria[]|Collection
+     */
+    private $categorias;
+
+    public function __construct()
+    {
+        $this->categorias = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -140,6 +154,23 @@ class Incidencia
     public function setCerradaPor(Persona $cerradaPor): Incidencia
     {
         $this->cerradaPor = $cerradaPor;
+        return $this;
+    }
+
+    /**
+     * @return Categoria[]|ArrayCollection|Collection
+     */
+    public function getCategorias()
+    {
+        return $this->categorias;
+    }
+
+    /**
+     * @param Categoria[]|ArrayCollection|Collection $categorias
+     */
+    public function setCategorias($categorias) : Incidencia
+    {
+        $this->categorias = $categorias;
         return $this;
     }
 }
