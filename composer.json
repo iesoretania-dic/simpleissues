@@ -68,5 +68,9 @@
             "require": "4.4.*",
             "docker": false
         }
+    },
+    "require-dev": {
+        "symfony/stopwatch": "4.4.*",
+        "symfony/web-profiler-bundle": "4.4.*"
     }
 }
