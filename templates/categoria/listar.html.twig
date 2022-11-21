@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Listado de categorías</h1>
+
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>¿Activa?</th>
+                <th>Gestor/a</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+                <tr>
+                    <td>{{ categoria.nombre }}</td>
+                    <td>{{ categoria.visible ? "Sí" : "No"}}</td>
+                    <td>{{ categoria.gestor.nombre }} {{ categoria.gestor.apellidos }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">No hay ninguna</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
